@@ -657,9 +657,9 @@ class BitField(Field):
         self.size = abs(size)
     def reverse(self, val):
         if self.size == 16:
-            val = socket.ntohs(val)
+            val = struct.unpack('>H',struct.pack('<H', val))[0]
         elif self.size == 32:
-            val = socket.ntohl(val)
+            val = struct.unpack('>I',struct.pack('<I', val))[0]
         return val
         
     def addfield(self, pkt, s, val):
